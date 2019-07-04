@@ -3,7 +3,7 @@ package com.employeeportal.validators;
 import com.employeeportal.entity.Employee;
 
 public class EmployeeValidator {
-	public static void validateEmployee(Employee employee) {
-		
+	public static boolean validateEmployee(Employee employee) {
+		return false;
 	}
 }

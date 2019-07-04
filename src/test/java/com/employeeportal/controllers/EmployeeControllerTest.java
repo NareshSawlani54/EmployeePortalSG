@@ -1,5 +1,7 @@
 package com.employeeportal.controllers;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -29,6 +31,15 @@ public class EmployeeControllerTest {
 		EmployeeController employeeController = new EmployeeController();
 		PowerMockito.mockStatic(EmployeeValidator.class);
 		employeeController.saveEmployee(employeeTestObject);
+		PowerMockito.verifyStatic(Mockito.times(1));
+	}
+	
+	@Test
+	@PrepareForTest(EmployeeValidator.class)
+	public void givenEmployeeValidationFails_whenSave_thenReturnsErrorString() {
+		EmployeeController employeeController = new EmployeeController();
+		PowerMockito.mockStatic(EmployeeValidator.class);
+		assertEquals(employeeController.saveEmployee(employeeTestObject), "Employee Validation Failed");
 		PowerMockito.verifyStatic(Mockito.times(1));
 	}
 	
