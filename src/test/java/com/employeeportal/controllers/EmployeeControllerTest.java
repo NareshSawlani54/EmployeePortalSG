@@ -11,6 +11,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.employeeportal.entity.Employee;
+import com.employeeportal.entity.Employee.Gender;
 import com.employeeportal.validators.EmployeeValidator;
 
 @RunWith(PowerMockRunner.class)
@@ -35,12 +36,17 @@ public class EmployeeControllerTest {
 	}
 	
 	@Test
-	@PrepareForTest(EmployeeValidator.class)
 	public void givenEmployeeValidationFails_whenSave_thenReturnsErrorString() {
 		EmployeeController employeeController = new EmployeeController();
-		PowerMockito.mockStatic(EmployeeValidator.class);
-		assertEquals(employeeController.saveEmployee(employeeTestObject), "Employee Validation Failed");
-		PowerMockito.verifyStatic(Mockito.times(1));
+		Employee employee = new Employee(null,null,null);
+		assertEquals(employeeController.saveEmployee(employee), "Employee Validation Failed");
+	}
+	
+	@Test
+	public void givenEmployeeValidationSucceeds_whenSave_thenReturnsSuccessString() {
+		EmployeeController employeeController = new EmployeeController();
+		Employee employee = new Employee("Test","Test",Gender.MALE);
+		assertEquals(employeeController.saveEmployee(employee), "Employee Added");
 	}
 	
 }

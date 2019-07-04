@@ -14,7 +14,7 @@ public class EmployeeController {
 			throw new RuntimeException("Employee Cannot be Null");
 		if(!EmployeeValidator.validateEmployee(employeeObject))
 			return "Employee Validation Failed";
-		return "SUCCESS";
+		return "Employee Added";
 	}
 	
 }

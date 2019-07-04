@@ -4,6 +4,12 @@ import com.employeeportal.entity.Employee;
 
 public class EmployeeValidator {
 	public static boolean validateEmployee(Employee employee) {
-		return false;
+		if(employee.getFirstName() == null)
+			return false;
+		if(employee.getLastName() == null)
+			return false;
+		if(employee.getGender() == null)
+			return false;
+		return true;
 	}
 }
