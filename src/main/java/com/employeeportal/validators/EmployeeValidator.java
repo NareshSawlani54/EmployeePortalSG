@@ -10,6 +10,10 @@ public class EmployeeValidator {
 			return false;
 		if(employee.getGender() == null)
 			return false;
+		if(employee.getDOB() == null)
+			return false;
+		if(employee.getDepartment() == null)
+			return false;
 		return true;
 	}
 }

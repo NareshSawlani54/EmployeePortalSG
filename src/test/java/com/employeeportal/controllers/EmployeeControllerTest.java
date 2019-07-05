@@ -2,6 +2,8 @@ package com.employeeportal.controllers;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Date;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -10,6 +12,7 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import com.employeeportal.entity.Department;
 import com.employeeportal.entity.Employee;
 import com.employeeportal.entity.Employee.Gender;
 import com.employeeportal.services.EmployeeService;
@@ -42,21 +45,21 @@ public class EmployeeControllerTest {
 	@Test
 	public void givenEmployeeValidationFails_whenSave_thenReturnsErrorString() {
 		EmployeeController employeeController = new EmployeeController(employeeService);
-		Employee employee = new Employee(null,null,null);
+		Employee employee = new Employee(null,null,null,null,null);
 		assertEquals(employeeController.saveEmployee(employee), "Employee Validation Failed");
 	}
 	
 	@Test
 	public void givenEmployeeValidationSucceeds_whenSave_thenReturnsSuccessString() {
 		EmployeeController employeeController = new EmployeeController(employeeService);
-		Employee employee = new Employee("Test","Test",Gender.MALE);
+		Employee employee = new Employee("Test","Test",Gender.MALE,new Date(System.currentTimeMillis()),new Department());
 		assertEquals(employeeController.saveEmployee(employee), "Employee Added");
 	}
 	
 	@Test
 	public void givenEmployeeValidationSucceeds_whenSave_thenEmployeeServiceIsCalled() {
 		EmployeeController employeeController = new EmployeeController(employeeService);
-		Employee employee = new Employee("Test","Test",Gender.FEMALE);
+		Employee employee = new Employee("Test","Test",Gender.FEMALE,new Date(System.currentTimeMillis()),new Department());
 		employeeController.saveEmployee(employee);
 		Mockito.verify(employeeService, Mockito.times(1));
 	}
