@@ -4,16 +4,13 @@ import com.employeeportal.entity.Employee;
 
 public class EmployeeValidator {
 	public static boolean validateEmployee(Employee employee) {
-		if(employee.getFirstName() == null)
+		if(employee.getFirstName() == null || employee.getFirstName().isEmpty() 
+				|| employee.getLastName() == null || employee.getLastName().isEmpty()
+				|| employee.getGender() == null 
+				|| employee.getDOB() == null || employee.getDOB().getTime() > System.currentTimeMillis()
+				|| employee.getDepartment() == null)
 			return false;
-		if(employee.getLastName() == null)
-			return false;
-		if(employee.getGender() == null)
-			return false;
-		if(employee.getDOB() == null)
-			return false;
-		if(employee.getDepartment() == null)
-			return false;
+		
 		return true;
 	}
 }
