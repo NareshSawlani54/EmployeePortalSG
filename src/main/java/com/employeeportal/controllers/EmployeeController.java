@@ -22,7 +22,8 @@ public class EmployeeController {
 		if(!EmployeeValidator.validateEmployee(employeeObject))
 			return "Employee Validation Failed";
 		
-		mEmployeeService.service(employeeObject);
+		if(!mEmployeeService.saveEmployee(employeeObject))
+			return "Employee Addition Failed";
 		
 		return "Employee Added";
 	}

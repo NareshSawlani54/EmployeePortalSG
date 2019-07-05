@@ -4,8 +4,8 @@ import com.employeeportal.entity.Employee;
 
 public class EmployeeService {
 
-	public void service(Employee employee) {
-		
+	public boolean saveEmployee(Employee employee) {
+		return false;
 	}
 	
 }

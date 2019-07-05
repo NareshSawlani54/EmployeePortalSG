@@ -1,6 +1,7 @@
 package com.employeeportal.controllers;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 import java.util.Date;
 
@@ -53,6 +54,7 @@ public class EmployeeControllerTest {
 	public void givenEmployeeValidationSucceeds_whenSave_thenReturnsSuccessString() {
 		EmployeeController employeeController = new EmployeeController(employeeService);
 		Employee employee = new Employee("Test","Test",Gender.MALE,new Date(System.currentTimeMillis()),new Department());
+		Mockito.when(employeeService.saveEmployee(employee)).thenReturn(true);
 		assertEquals(employeeController.saveEmployee(employee), "Employee Added");
 	}
 	
@@ -63,5 +65,23 @@ public class EmployeeControllerTest {
 		employeeController.saveEmployee(employee);
 		Mockito.verify(employeeService, Mockito.times(1));
 	}
+	
+	@Test
+	public void givenEmployeeServiceReturnTrue_whenSave_thenReturnSuccessString() {
+		EmployeeController employeeController = new EmployeeController(employeeService);
+		Employee employee = new Employee("Test","Test",Gender.FEMALE,new Date(System.currentTimeMillis()),new Department());
+		Mockito.when(employeeService.saveEmployee(employee)).thenReturn(true);
+		assertEquals(employeeController.saveEmployee(employee),"Employee Added");
+	}
+	
+	@Test
+	public void givenEmployeeServiceReturnFalse_whenSave_thenReturnFailureString() {
+		EmployeeController employeeController = new EmployeeController(employeeService);
+		Employee employee = new Employee("Test","Test",Gender.FEMALE,new Date(System.currentTimeMillis()),new Department());
+		Mockito.when(employeeService.saveEmployee(employee)).thenReturn(false);
+		assertEquals(employeeController.saveEmployee(employee),"Employee Addition Failed");
+	}
+	
+	
 	
 }
