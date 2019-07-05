@@ -6,3 +6,11 @@ Build Steps :
 1. Import as Existing Gradle Project
 2. Gradle Sync & Build
 3. Run EmployeePortalMain as a normal Java Application [Default uses port 8080]
+
+Launch Config :
+For Application open URL : http://localhost:8080
+For H2 Database open URL : http://localhost:8080/h2-console
+H2 Details :
+JDBC URL: jdbc:h2:mem:employeeDB
+User Name : SocGen
+Password : Leave Empty

@@ -46,14 +46,14 @@ public class EmployeeControllerTest {
 	@Test
 	public void givenEmployeeValidationFails_whenSave_thenReturnsErrorString() {
 		EmployeeController employeeController = new EmployeeController(employeeService);
-		Employee employee = new Employee(null,null,null,null,null);
+		Employee employee = new Employee(0,null,null,null,null,null);
 		assertEquals(employeeController.saveEmployee(employee), "Employee Validation Failed");
 	}
 	
 	@Test
 	public void givenEmployeeValidationSucceeds_whenSave_thenReturnsSuccessString() {
 		EmployeeController employeeController = new EmployeeController(employeeService);
-		Employee employee = new Employee("Test","Test",Gender.MALE,new Date(System.currentTimeMillis()),new Department());
+		Employee employee = new Employee(1,"Test","Test",Gender.MALE,new Date(System.currentTimeMillis()),new Department());
 		Mockito.when(employeeService.saveEmployee(employee)).thenReturn(true);
 		assertEquals(employeeController.saveEmployee(employee), "Employee Added");
 	}
@@ -61,7 +61,7 @@ public class EmployeeControllerTest {
 	@Test
 	public void givenEmployeeValidationSucceeds_whenSave_thenEmployeeServiceIsCalled() {
 		EmployeeController employeeController = new EmployeeController(employeeService);
-		Employee employee = new Employee("Test","Test",Gender.FEMALE,new Date(System.currentTimeMillis()),new Department());
+		Employee employee = new Employee(1,"Test","Test",Gender.FEMALE,new Date(System.currentTimeMillis()),new Department());
 		employeeController.saveEmployee(employee);
 		Mockito.verify(employeeService, Mockito.times(1));
 	}
@@ -69,7 +69,7 @@ public class EmployeeControllerTest {
 	@Test
 	public void givenEmployeeServiceReturnTrue_whenSave_thenReturnSuccessString() {
 		EmployeeController employeeController = new EmployeeController(employeeService);
-		Employee employee = new Employee("Test","Test",Gender.FEMALE,new Date(System.currentTimeMillis()),new Department());
+		Employee employee = new Employee(1,"Test","Test",Gender.FEMALE,new Date(System.currentTimeMillis()),new Department());
 		Mockito.when(employeeService.saveEmployee(employee)).thenReturn(true);
 		assertEquals(employeeController.saveEmployee(employee),"Employee Added");
 	}
@@ -77,7 +77,7 @@ public class EmployeeControllerTest {
 	@Test
 	public void givenEmployeeServiceReturnFalse_whenSave_thenReturnFailureString() {
 		EmployeeController employeeController = new EmployeeController(employeeService);
-		Employee employee = new Employee("Test","Test",Gender.FEMALE,new Date(System.currentTimeMillis()),new Department());
+		Employee employee = new Employee(1,"Test","Test",Gender.FEMALE,new Date(System.currentTimeMillis()),new Department());
 		Mockito.when(employeeService.saveEmployee(employee)).thenReturn(false);
 		assertEquals(employeeController.saveEmployee(employee),"Employee Addition Failed");
 	}

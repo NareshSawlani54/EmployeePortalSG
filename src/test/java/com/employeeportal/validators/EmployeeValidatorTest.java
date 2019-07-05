@@ -16,43 +16,43 @@ public class EmployeeValidatorTest {
 	
 	@Test
 	public void givenEmployeeFirstNameOnly_whenValidate_thenReturnsFalse() {
-		Employee employeeToTest = new Employee("test", null,null, null,null);
+		Employee employeeToTest = new Employee(1,"test", null,null, null,null);
 		assertFalse(EmployeeValidator.validateEmployee(employeeToTest));
 	}
 	
 	@Test
 	public void givenEmployeeFirstLastNameOnly_whenValidate_thenReturnsFalse() {
-		Employee employeeToTest = new Employee("test", "test", null, null,null);
+		Employee employeeToTest = new Employee(1,"test", "test", null, null,null);
 		assertFalse(EmployeeValidator.validateEmployee(employeeToTest));
 	}
 
 	@Test
 	public void notGivengivenEmployeeDOBDepartment_whenValidate_thenReturnsFalse() {
-		Employee employeeToTest = new Employee("test", "test", Gender.MALE, null, null);
+		Employee employeeToTest = new Employee(1,"test", "test", Gender.MALE, null, null);
 		assertFalse(EmployeeValidator.validateEmployee(employeeToTest));
 	}
 	
 	@Test
 	public void notGivenEmployeeDepartment_whenValidate_thenReturnsFalse() {
-		Employee employeeToTest = new Employee("test", "test", Gender.MALE, new Date(System.currentTimeMillis()), null);
+		Employee employeeToTest = new Employee(1,"test", "test", Gender.MALE, new Date(System.currentTimeMillis()), null);
 		assertFalse(EmployeeValidator.validateEmployee(employeeToTest));
 	}
 	
 	@Test
 	public void givenEmployeeAllFields_whenValidate_thenReturnsTrue() {
-		Employee employeeToTest = new Employee("test", "test", Gender.MALE, new Date(System.currentTimeMillis()), new Department());
+		Employee employeeToTest = new Employee(1,"test", "test", Gender.MALE, new Date(System.currentTimeMillis()), new Department());
 		assertTrue(EmployeeValidator.validateEmployee(employeeToTest));
 	}
 	
 	@Test
 	public void givenEmployeeFirstNameEmpty_whenValidate_thenReturnsFalse() {
-		Employee employeeToTest = new Employee("", "test", Gender.MALE, new Date(System.currentTimeMillis()), new Department());
+		Employee employeeToTest = new Employee(1,"", "test", Gender.MALE, new Date(System.currentTimeMillis()), new Department());
 		assertFalse(EmployeeValidator.validateEmployee(employeeToTest));
 	}
 	
 	@Test
 	public void givenEmployeeFirstLastNameEmpty_whenValidate_thenReturnsFalse() {
-		Employee employeeToTest = new Employee("test", "", Gender.MALE, new Date(System.currentTimeMillis()), new Department());
+		Employee employeeToTest = new Employee(1,"test", "", Gender.MALE, new Date(System.currentTimeMillis()), new Department());
 		assertFalse(EmployeeValidator.validateEmployee(employeeToTest));
 	}
 	
@@ -61,7 +61,19 @@ public class EmployeeValidatorTest {
 		Calendar today = Calendar.getInstance();
 		today.set(Calendar.DAY_OF_MONTH, today.get(Calendar.DAY_OF_MONTH) + 1);
 		Date tomorrow = today.getTime();
-		Employee employeeToTest = new Employee("test", "test", Gender.MALE, tomorrow, new Department());
+		Employee employeeToTest = new Employee(1,"test", "test", Gender.MALE, tomorrow, new Department());
+		assertFalse(EmployeeValidator.validateEmployee(employeeToTest));
+	}
+	
+	@Test
+	public void givenEmployeeIdZero_whenValidate_thenReturnsFalse() {
+		Employee employeeToTest = new Employee(0,"test", "test", Gender.MALE, new Date(System.currentTimeMillis()), new Department());
+		assertFalse(EmployeeValidator.validateEmployee(employeeToTest));
+	}
+	
+	@Test
+	public void givenEmployeeIdOnly_whenValidate_thenReturnsFalse() {
+		Employee employeeToTest = new Employee(1,null,null,null, null,null);
 		assertFalse(EmployeeValidator.validateEmployee(employeeToTest));
 	}
 }
