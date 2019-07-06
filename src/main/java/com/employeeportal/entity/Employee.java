@@ -2,6 +2,7 @@ package com.employeeportal.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -23,15 +24,23 @@ public class Employee {
 	
 	@Id
 	@GeneratedValue
+	@Column(name = "id")
 	private long id;
+	
+	@Column(name = "first_name")
 	private String mFirstName;
+	
+	@Column(name = "last_name")
 	private String mLastName;
 	
+	@Column(name = "gender")
 	@Enumerated(EnumType.STRING)
 	private Gender mGender;
+	
+	@Column(name = "dob")
 	private Date mDOB;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "dept_id", nullable = true)
 	private Department mDepartment;
 	

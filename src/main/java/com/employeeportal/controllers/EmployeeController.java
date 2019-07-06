@@ -1,5 +1,9 @@
 package com.employeeportal.controllers;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +19,7 @@ public class EmployeeController {
 	
 	private EmployeeService mEmployeeService;
 	
+	@Autowired
 	public EmployeeController(EmployeeService employeeService) {
 		this.mEmployeeService = employeeService;
 	}
@@ -26,10 +31,15 @@ public class EmployeeController {
 		if(!EmployeeValidator.validateEmployee(employeeObject))
 			return "Employee Validation Failed";
 		
-		if(!mEmployeeService.saveEmployee(employeeObject))
+		if(mEmployeeService == null || !mEmployeeService.saveEmployee(employeeObject))
 			return "Employee Addition Failed";
 		
 		return "Employee Added Successfully";
+	}
+	
+	@GetMapping("/getAll")
+	public List<Employee> getAllEmployees() {
+		return mEmployeeService.getAllEmpoyeesSortedAscending();
 	}
 	
 }

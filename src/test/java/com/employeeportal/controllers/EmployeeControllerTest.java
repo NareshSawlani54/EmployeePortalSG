@@ -82,6 +82,17 @@ public class EmployeeControllerTest {
 		assertEquals(employeeController.saveEmployee(employee),"Employee Addition Failed");
 	}
 	
+	@Test(expected = NullPointerException.class)
+	public void givenEmployeeServiceNull_whenGetAll_thenThrowsException() {
+		EmployeeController employeeController = new EmployeeController(null);
+		employeeController.getAllEmployees();
+	}
 	
+	@Test
+	public void givenEmployeeServiceNull_whenSaveEmpoyee_thenReturnErrorSring() {
+		EmployeeController employeeController = new EmployeeController(null);
+		Employee employee = new Employee("Test","Test",Gender.FEMALE,new Date(System.currentTimeMillis()),new Department(1,"Test"));
+		assertEquals(employeeController.saveEmployee(employee),"Employee Addition Failed");
+	}
 	
 }
