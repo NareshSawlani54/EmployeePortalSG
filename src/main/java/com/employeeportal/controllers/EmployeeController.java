@@ -13,8 +13,16 @@ import com.employeeportal.entity.Employee;
 import com.employeeportal.services.EmployeeService;
 import com.employeeportal.validators.EmployeeValidator;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+@Api(tags = { "Employee RestFul Services" })
 @RestController
 @RequestMapping("/employee")
+@EnableSwagger2
 public class EmployeeController {
 	
 	private EmployeeService mEmployeeService;
@@ -25,7 +33,12 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/save")
-	public String saveEmployee(@RequestBody Employee employeeObject) {
+	@ApiOperation(consumes = "application/json",produces = "application/json", value = "Add An Employee to Database",
+				  notes = "Pass An Employee and Rest Api will Save it to Database")
+	//@ApiImplicitParam(name = "employeeObject",dataTypeClass = Employee.class ,required = true, paramType = "body")
+	public String saveEmployee(@RequestBody
+			@ApiParam(name = "employee" , required = true, value = "Employee Details",type = "com.employeeportal.entity.Employee")
+			Employee employeeObject) {
 		if(employeeObject == null)
 			throw new RuntimeException("Employee Cannot be Null");
 		if(!EmployeeValidator.validateEmployee(employeeObject))
@@ -38,6 +51,8 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/getAll")
+	@ApiOperation(consumes = "application/json",produces = "application/json", value = "Retrives All Employees From Database",
+	  notes = "Rest Api will Return All Existing Records of Employees")
 	public List<Employee> getAllEmployees() {
 		return mEmployeeService.getAllEmpoyeesSortedAscending();
 	}

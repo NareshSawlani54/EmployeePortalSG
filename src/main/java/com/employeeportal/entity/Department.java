@@ -11,15 +11,21 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
+@ApiModel(description = "All Details Of Department")
 public class Department {
 	
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
+	@ApiModelProperty(value = "Id of Department", required = true, notes = "Must be Ranging from 1 to 4")
 	private long id;
 	
 	@Column(name = "name")
+	@ApiModelProperty(value = "NAme of Department",required = false)
 	private String mDepartmentName;
 	
 	public Department() {}
