@@ -15,7 +15,9 @@ public class EmployeeService {
 	}
 
 	public boolean saveEmployee(Employee employee) {
-		mEmployeeRepository.save(employee);
+		Employee persistedEmployee = mEmployeeRepository.save(employee);
+		if(persistedEmployee != null)
+			return true;
 		return false;
 	}
 	

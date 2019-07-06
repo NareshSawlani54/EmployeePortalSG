@@ -11,7 +11,6 @@ public class EmployeeRepository extends SimpleJpaRepository<Employee, Long>{
 
 	public EmployeeRepository(EntityManager em) {
 		super(Employee.class, em);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override

@@ -3,6 +3,8 @@ package com.employeeportal.entity;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,9 +26,9 @@ public class Employee {
 	private long id;
 	private String mFirstName;
 	private String mLastName;
-	private Gender mGender;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@Enumerated(EnumType.STRING)
+	private Gender mGender;
 	private Date mDOB;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -35,8 +37,7 @@ public class Employee {
 	
 	public Employee() {}
 
-	public Employee(long id,String firstName,String lastName,Gender gender,Date dob, Department department) {
-		this.id = id;
+	public Employee(String firstName,String lastName,Gender gender,Date dob, Department department) {
 		this.mFirstName = firstName;
 		this.mLastName = lastName;
 		this.mGender = gender;
@@ -44,22 +45,22 @@ public class Employee {
 		this.mDepartment = department;
 	}
 	
-	@JsonProperty("id")
 	public long getId() {
 		return id;
 	}
 
-	@JsonProperty("id")
 	public void setId(long id) {
 		this.id = id;
 	}
 
 	@JsonProperty("dob")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	public Date getDOB() {
 		return mDOB;
 	}
 
 	@JsonProperty("dob")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	public void setDOB(Date mDOB) {
 		this.mDOB = mDOB;
 	}
