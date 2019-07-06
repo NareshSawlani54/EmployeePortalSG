@@ -40,7 +40,7 @@ public class EmployeeValidatorTest {
 	
 	@Test
 	public void givenEmployeeAllFields_whenValidate_thenReturnsTrue() {
-		Employee employeeToTest = new Employee(1,"test", "test", Gender.MALE, new Date(System.currentTimeMillis()), new Department());
+		Employee employeeToTest = new Employee(1,"test", "test", Gender.MALE, new Date(System.currentTimeMillis()), new Department(1,"Test"));
 		assertTrue(EmployeeValidator.validateEmployee(employeeToTest));
 	}
 	
@@ -74,6 +74,18 @@ public class EmployeeValidatorTest {
 	@Test
 	public void givenEmployeeIdOnly_whenValidate_thenReturnsFalse() {
 		Employee employeeToTest = new Employee(1,null,null,null, null,null);
+		assertFalse(EmployeeValidator.validateEmployee(employeeToTest));
+	}
+	
+	@Test
+	public void givenDepartmentValidationFailed_whenValidate_thenReturnsFalse() {
+		Employee employeeToTest = new Employee(1,null,null,null, null,new Department());
+		assertFalse(EmployeeValidator.validateEmployee(employeeToTest));
+	}
+	
+	@Test
+	public void givenEmpoyeeNull_whenValidate_thenReturnsFalse() {
+		Employee employeeToTest = null;
 		assertFalse(EmployeeValidator.validateEmployee(employeeToTest));
 	}
 }

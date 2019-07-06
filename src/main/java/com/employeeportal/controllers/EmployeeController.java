@@ -29,7 +29,7 @@ public class EmployeeController {
 		if(!mEmployeeService.saveEmployee(employeeObject))
 			return "Employee Addition Failed";
 		
-		return "Employee Added";
+		return "Employee Added Successfully";
 	}
 	
 }

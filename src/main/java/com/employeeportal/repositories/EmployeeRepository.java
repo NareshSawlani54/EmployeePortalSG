@@ -14,4 +14,11 @@ public class EmployeeRepository extends SimpleJpaRepository<Employee, Long>{
 		// TODO Auto-generated constructor stub
 	}
 	
+	@Override
+	public <S extends Employee> S save(S entity) {
+		if(entity == null)
+			throw new IllegalArgumentException();
+		return super.save(entity);
+	}
+	
 }

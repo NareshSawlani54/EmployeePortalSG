@@ -53,9 +53,9 @@ public class EmployeeControllerTest {
 	@Test
 	public void givenEmployeeValidationSucceeds_whenSave_thenReturnsSuccessString() {
 		EmployeeController employeeController = new EmployeeController(employeeService);
-		Employee employee = new Employee(1,"Test","Test",Gender.MALE,new Date(System.currentTimeMillis()),new Department());
+		Employee employee = new Employee(1,"Test","Test",Gender.MALE,new Date(System.currentTimeMillis()),new Department(1,"Test"));
 		Mockito.when(employeeService.saveEmployee(employee)).thenReturn(true);
-		assertEquals(employeeController.saveEmployee(employee), "Employee Added");
+		assertEquals(employeeController.saveEmployee(employee), "Employee Added Successfully");
 	}
 	
 	@Test
@@ -69,15 +69,15 @@ public class EmployeeControllerTest {
 	@Test
 	public void givenEmployeeServiceReturnTrue_whenSave_thenReturnSuccessString() {
 		EmployeeController employeeController = new EmployeeController(employeeService);
-		Employee employee = new Employee(1,"Test","Test",Gender.FEMALE,new Date(System.currentTimeMillis()),new Department());
+		Employee employee = new Employee(1,"Test","Test",Gender.FEMALE,new Date(System.currentTimeMillis()),new Department(1,"Test"));
 		Mockito.when(employeeService.saveEmployee(employee)).thenReturn(true);
-		assertEquals(employeeController.saveEmployee(employee),"Employee Added");
+		assertEquals(employeeController.saveEmployee(employee),"Employee Added Successfully");
 	}
 	
 	@Test
 	public void givenEmployeeServiceReturnFalse_whenSave_thenReturnFailureString() {
 		EmployeeController employeeController = new EmployeeController(employeeService);
-		Employee employee = new Employee(1,"Test","Test",Gender.FEMALE,new Date(System.currentTimeMillis()),new Department());
+		Employee employee = new Employee(1,"Test","Test",Gender.FEMALE,new Date(System.currentTimeMillis()),new Department(1,"Test"));
 		Mockito.when(employeeService.saveEmployee(employee)).thenReturn(false);
 		assertEquals(employeeController.saveEmployee(employee),"Employee Addition Failed");
 	}
