@@ -3,6 +3,7 @@ package com.employeeportal.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +26,8 @@ public class DepartmentController {
 		this.mDepartmentService = departmentService;
 	}
 	
-	@GetMapping("/getAll")
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping(path = "/getAll",produces = {"application/json"})
 	@ApiOperation(consumes = "application/json",produces = "application/json", value = "Retrives All Departments From Database",
 	  notes = "Rest Api will Return All Existing Records of Departments")
 	public List<Department> getAllDepartments() {

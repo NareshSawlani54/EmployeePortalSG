@@ -49,8 +49,8 @@ public class Employee {
 	private Gender mGender;
 	
 	@JsonProperty("dob")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-	@ApiModelProperty(value = "DOB Of Empoyee", notes = "Must be in DD-MM-YYYY Format" , example = "23-06-1989",position = 4)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@ApiModelProperty(value = "DOB Of Empoyee", notes = "Must be in YYYY-MM-DD Format" , example = "1989-06-23",position = 4)
 	@Column(name = "dob")
 	private Date mDOB;
 	

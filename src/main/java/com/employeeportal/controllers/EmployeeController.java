@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +36,8 @@ public class EmployeeController {
 		this.mEmployeeService = employeeService;
 	}
 	
-	@PostMapping("/save")
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping(path = "/save",produces = {"application/json"},consumes = {"application/json"})
 	@ApiOperation(consumes = "application/json",produces = "application/json", value = "Add An Employee to Database",
 				  notes = "Pass An Employee and Rest Api will Save it to Database")
 	@ApiImplicitParams (
@@ -67,7 +69,8 @@ public class EmployeeController {
 		return "Employee Added Successfully";
 	}
 	
-	@GetMapping("/getAll")
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping(path = "/getAll",produces = {"application/json"})
 	@ApiOperation(consumes = "application/json",produces = "application/json", value = "Retrives All Employees From Database",
 	  notes = "Rest Api will Return All Existing Records of Employees Sorted By First Name")
 	public List<Employee> getAllEmployees() {
