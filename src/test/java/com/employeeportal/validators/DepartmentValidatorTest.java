@@ -14,18 +14,9 @@ public class DepartmentValidatorTest {
 		assertFalse(DepartmentValidator.validate(new Department(0,"Test")));
 	}
 
-	@Test
-	public void givenNullNameAndCorrectID_whenValidate_thenReturnFalse() {
-		assertFalse(DepartmentValidator.validate(new Department(2,null)));
-	}
 	
 	@Test
-	public void givenEmptyNameAndCorrectID_whenValidate_thenReturnFalse() {
-		assertFalse(DepartmentValidator.validate(new Department(2,"")));
-	}
-	
-	@Test
-	public void givenCorrectNameAndCorrectID_whenValidate_thenReturnTrue() {
+	public void givenCorrectID_whenValidate_thenReturnTrue() {
 		assertTrue(DepartmentValidator.validate(new Department(2,"Test")));
 	}
 	

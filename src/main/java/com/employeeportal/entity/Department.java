@@ -21,11 +21,13 @@ public class Department {
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
-	@ApiModelProperty(value = "Id of Department", required = true, notes = "Must be Ranging from 1 to 4")
+	@JsonProperty("id")
+	@ApiModelProperty(example = "1",value = "Id of Department", required = true, notes = "Must be Ranging from 1 to 4",allowableValues = "range[1,4]")
 	private long id;
 	
+	@JsonProperty("name")
 	@Column(name = "name")
-	@ApiModelProperty(value = "NAme of Department",required = false)
+	@ApiModelProperty(value = "Name of Department", example = "IT")
 	private String mDepartmentName;
 	
 	public Department() {}
@@ -35,22 +37,18 @@ public class Department {
 		this.mDepartmentName = departmentName;
 	}
 
-	@JsonProperty("id")
 	public long getId() {
 		return id;
 	}
 
-	@JsonProperty("id")
 	public void setId(long id) {
 		this.id = id;
 	}
 
-	@JsonProperty("name")
 	public String getName() {
 		return mDepartmentName;
 	}
 
-	@JsonProperty("name")
 	public void setName(String departmentName) {
 		this.mDepartmentName = departmentName;
 	}

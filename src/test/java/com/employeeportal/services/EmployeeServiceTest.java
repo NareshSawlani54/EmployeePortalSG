@@ -1,5 +1,6 @@
 package com.employeeportal.services;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -23,6 +24,12 @@ public class EmployeeServiceTest {
 		Mockito.doReturn(employee).when(employeeRepository).save(employee);
 		EmployeeService employeeService = new EmployeeService(employeeRepository);
 		assertTrue(employeeService.saveEmployee(employee));
+	}
+	
+	@Test
+	public void givenEmployeeRepository_whenGetAll_thenReturnList() {
+		EmployeeService employeeService = new EmployeeService(employeeRepository);
+		assertNotNull(employeeService.getAllEmpoyeesSortedAscending());
 	}
 	
 }
