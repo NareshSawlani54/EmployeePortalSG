@@ -16,3 +16,6 @@ JDBC URL: jdbc:h2:mem:employeeDB
 User Name : SocGen
 Password : Leave Empty
 Note : Department Table Records are loaded from a sql script under resources folder
+
+For Api Docs :
+Launch http://localhost:8080/swagger-ui.html
