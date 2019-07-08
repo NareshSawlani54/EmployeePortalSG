@@ -9,8 +9,10 @@ Build Steps :
 
 Launch Config :
 For Application open URL : http://localhost:8080
-For H2 Database open URL : http://localhost:8080/h2-console
-H2 Details :
+For H2 Database console open URL : http://localhost:8080/h2-console
+
+H2 In memory Db details :
 JDBC URL: jdbc:h2:mem:employeeDB
 User Name : SocGen
 Password : Leave Empty
+Note : Department Table Records are loaded from a sql script under resources folder
