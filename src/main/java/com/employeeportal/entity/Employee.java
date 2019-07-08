@@ -11,13 +11,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.employeeportal.doc.DepartmentApiDoc.DepartmentDoc;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(description = "All Details About An Empoyee")
+import static com.employeeportal.doc.EmployeeApiDoc.EmployeeDoc.*;
+
+@ApiModel(description = Model_Desc)
 @Entity
 public class Employee {
 	
@@ -29,35 +32,35 @@ public class Employee {
 	@ApiModelProperty(required = false,hidden = true,position = 0)
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
+	@Column(name = ID)
 	private long id;
 	
-	@JsonProperty("firstName")
-	@ApiModelProperty(value = "First Name Of Empoyee",example = "'Naresh'",position = 1)
-	@Column(name = "first_name")
+	@JsonProperty(FirstName)
+	@ApiModelProperty(value = FirstName_Detail,example = FirstName_Example,position = FirstName_Pos)
+	@Column(name = FirstName_Column_Name)
 	private String mFirstName;
 	
-	@JsonProperty("lastName")
-	@ApiModelProperty(value = "Last Name Of Empoyee",example = "Sawlani",position = 2)
-	@Column(name = "last_name")
+	@JsonProperty(LastName)
+	@ApiModelProperty(value = LastName_Detail,example = LastName_Example,position = LastName_Pos)
+	@Column(name = LastName_Column_Name)
 	private String mLastName;
 	
-	@JsonProperty("gender")
-	@ApiModelProperty(value = "Gender Of Empoyee", example = "MALE",position = 3)
-	@Column(name = "gender")
+	@JsonProperty(Gender)
+	@ApiModelProperty(value = Gender_Detail, example = Gender_Example,position = Gender_Pos)
+	@Column(name = Gender_Column_Name)
 	@Enumerated(EnumType.STRING)
 	private Gender mGender;
 	
-	@JsonProperty("dob")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	@ApiModelProperty(value = "DOB Of Empoyee", notes = "Must be in YYYY-MM-DD Format" , example = "1989-06-23",position = 4)
-	@Column(name = "dob")
+	@JsonProperty(DOB)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DOB_Pattern)
+	@ApiModelProperty(value = DOB_Detail, notes = DOB_Notes, example = DOB_Example,position = DOB_Pos)
+	@Column(name = DOB_Column_Name)
 	private Date mDOB;
 	
-	@JsonProperty("department")
-	@ApiModelProperty(position = 5)
+	@JsonProperty(DepartmentDoc.Department)
+	@ApiModelProperty(position = Department_Pos)
 	@ManyToOne
-	@JoinColumn(name = "dept_id", nullable = true)
+	@JoinColumn(name = DepartmentFKColumnName, nullable = true)
 	private Department mDepartment;
 	
 	public Employee() {}

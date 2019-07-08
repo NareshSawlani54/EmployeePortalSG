@@ -14,20 +14,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+
+import static com.employeeportal.doc.DepartmentApiDoc.DepartmentDoc.*;
+
 @Entity
-@ApiModel(description = "All Details Of Department")
+@ApiModel(description = Model_Desc)
 public class Department {
 	
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
-	@JsonProperty("id")
-	@ApiModelProperty(example = "1",value = "Id of Department", required = true, notes = "Must be Ranging from 1 to 4",allowableValues = "range[1,4]")
+	@Column(name = ID)
+	@JsonProperty(ID)
+	@ApiModelProperty(example = IDExample,value = ID_Detail, required = true, notes = ID_Notes,allowableValues = ID_Range)
 	private long id;
 	
-	@JsonProperty("name")
-	@Column(name = "name")
-	@ApiModelProperty(value = "Name of Department", example = "IT")
+	@JsonProperty(Name)
+	@Column(name = Name_ColumnName)
+	@ApiModelProperty(value = Name_Detail, example = Name_Exmaple)
 	private String mDepartmentName;
 	
 	public Department() {}

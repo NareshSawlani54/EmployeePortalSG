@@ -24,9 +24,14 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-@Api(tags = { "Employee RestFul Services" })
+
+import static com.employeeportal.doc.EmployeeApiDoc.*;
+import static com.employeeportal.doc.EmployeeApiDoc.SaveEmployee.*;
+import static com.employeeportal.doc.EmployeeApiDoc.GetAllEmployees;
+
+@Api(tags = { TAG })
 @RestController
-@RequestMapping("/employee")
+@RequestMapping(CONTROLLER_PATH)
 public class EmployeeController {
 	
 	private EmployeeService mEmployeeService;
@@ -36,43 +41,43 @@ public class EmployeeController {
 		this.mEmployeeService = employeeService;
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping(path = "/save",produces = {"application/json"},consumes = {"application/json"})
-	@ApiOperation(consumes = "application/json",produces = "application/json", value = "Add An Employee to Database",
-				  notes = "Pass An Employee and Rest Api will Save it to Database")
+	@CrossOrigin(origins = CORS_PATH )
+	@PostMapping(path = SAVE_PATH,produces = {PRODUCES_JSON},consumes = {CONSUMES_JSON})
+	@ApiOperation(consumes = CONSUMES_JSON,produces = PRODUCES_JSON, value = DETAIL,
+				  notes = NOTES)
 	@ApiImplicitParams (
 		value = { 
-			@ApiImplicitParam(paramType = "body",name = "employeeObject",dataTypeClass = Employee.class ,required = true,value = "Employee Details",dataType = "Employee") 
+			@ApiImplicitParam(paramType = "body",name = "employeeObject",dataTypeClass = Employee.class ,required = true,value = PARAM_DETAILS,dataType = PARAM_DATATYPE) 
 		}
 	)
 	@ApiResponses(
 			value = {
-					@ApiResponse(code = 201, message = "Employee Added Successfully"),
-					@ApiResponse(code = 400, message = "Employee Validation Failed"),
-					@ApiResponse(code = 403, message = "Employee Addition Failed")
+					@ApiResponse(code = RESPONSE_201, message = RESPONSE_201_MSG),
+					@ApiResponse(code = RESPONSE_400, message = RESPONSE_400_MSG),
+					@ApiResponse(code = RESPONSE_403, message = RESPONSE_403_MSG)
 			}
 			)
 	public String saveEmployee(@RequestBody Employee employeeObject, HttpServletResponse response) {
 		if(employeeObject == null)
-			throw new RuntimeException("Employee Cannot be Null");
+			throw new RuntimeException(EMPLOYEE_CANNOT_NULL);
 		if(!EmployeeValidator.validateEmployee(employeeObject)) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			return "Employee Validation Failed";
+			return RESPONSE_400_MSG;
 		}
 		
 		if(mEmployeeService == null || !mEmployeeService.saveEmployee(employeeObject)) {
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-			return "Employee Addition Failed";
+			return RESPONSE_403_MSG;
 		}
 		
 		response.setStatus(HttpServletResponse.SC_CREATED);
-		return "Employee Added Successfully";
+		return RESPONSE_201_MSG;
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping(path = "/getAll",produces = {"application/json"})
-	@ApiOperation(consumes = "application/json",produces = "application/json", value = "Retrives All Employees From Database",
-	  notes = "Rest Api will Return All Existing Records of Employees Sorted By First Name")
+	@CrossOrigin(origins = CORS_PATH)
+	@GetMapping(path = GetAllEmployees.GET_PATH,produces = {PRODUCES_JSON})
+	@ApiOperation(consumes = CONSUMES_JSON,produces = PRODUCES_JSON, value = GetAllEmployees.DETAIL,
+	  notes = GetAllEmployees.NOTES)
 	public List<Employee> getAllEmployees() {
 		return mEmployeeService.getAllEmpoyeesSortedAscending();
 	}
@@ -81,7 +86,7 @@ public class EmployeeController {
 	public String handleAllUnknownExceptions(Exception e, HttpServletResponse response) {
 		e.printStackTrace();
 		response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-		return "Operation Failed";
+		return OPERATION_FAILED;
 	}
 	
 }

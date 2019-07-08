@@ -1,7 +1,6 @@
 package com.employeeportal.controllers;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +13,13 @@ import com.employeeportal.services.DepartmentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(tags = { "Department RestFul Services" })
+import static com.employeeportal.doc.DepartmentApiDoc.*;
+import static com.employeeportal.doc.DepartmentApiDoc.GetAllDepartments.*;
+import static com.employeeportal.doc.DepartmentApiDoc.DepartmentDoc.*;
+
+@Api(tags = { TAG })
 @RestController
-@RequestMapping("/department")
+@RequestMapping(CONTROLLER_PATH)
 public class DepartmentController {
 	
 	private DepartmentService mDepartmentService;
@@ -26,10 +29,10 @@ public class DepartmentController {
 		this.mDepartmentService = departmentService;
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping(path = "/getAll",produces = {"application/json"})
-	@ApiOperation(consumes = "application/json",produces = "application/json", value = "Retrives All Departments From Database",
-	  notes = "Rest Api will Return All Existing Records of Departments")
+	@CrossOrigin(origins = CORS_PATH)
+	@GetMapping(path = GET_PATH,produces = {PRODUCES_JSON})
+	@ApiOperation(consumes = CONSUMES_JSON,produces = PRODUCES_JSON, value = DETAIL,
+	  notes = NOTES)
 	public List<Department> getAllDepartments() {
 		return mDepartmentService.getAllDepartments();
 	}
